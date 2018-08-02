@@ -13,10 +13,14 @@ Plugin 'Townk/vim-autoclose'
 Plugin 'tpope/vim-surround'
 Plugin 'ap/vim-buftabline'
 Plugin 'morhetz/gruvbox'
+Plugin 'adampasz/stonewashed-themes'
 Plugin 'vimwiki/vimwiki'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
 Plugin 'reedes/vim-pencil'
+Plugin 'reedes/vim-colors-pencil'
+Plugin 'reedes/vim-thematic'
+Plugin 'ConradIrwin/vim-bracketed-paste'
 
 call vundle#end()
 filetype plugin indent on
@@ -26,8 +30,22 @@ set encoding=utf-8
 " colors & appearance
 colorscheme gruvbox
 set background=dark
-set number
+set relativenumber
+if has('gui_running')
+	set guioptions=
+end
 
+" thematic
+let g:thematic#themes = {
+\	'gruvbox': {},
+\	'writing': {
+\		'colorscheme': 'stonewashed-256',
+\		'background': 'light',
+\		'typeface': 'Oxygen Mono',
+\		'font-size': 11,
+\		'linespace': 2
+\	},	
+\}
 
 " netrw
 let g:netrw_banner=0
@@ -42,7 +60,7 @@ let g:netrw_hide=1
 let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 
 " limelight
-let g:limelight_conceal_ctermfg=245
+let g:limelight_conceal_ctermfg=240
 
 " goyo
 function! s:goyo_enter()
@@ -73,14 +91,28 @@ augroup END
 
 function! SetUpMk()
 	setlocal spell spelllang=en_us
-	SoftPencil
+	call ProseMode()
 endfunction
 
 function! ProseMode()
 	setlocal spell spelllang=en_us
 	SoftPencil
 	Goyo
+	if has('gui_running')
+		Thematic writing
+		set guioptions=
+	endif
+endfunction
+
+function! LimelightToggle()
+	if has('gui_running')
+		Limelight!!0.8
+	else
+		Limelight!!
+	endif
 endfunction
 
 nnoremap <leader>wp :call ProseMode()<cr>
-nnoremap <leader>ll :Limelight!!<cr>
+nnoremap <leader>ll :call LimelightToggle()<cr>
+nnoremap <leader>n :bn<cr>
+nnoremap <leader>N :bp<cr>
