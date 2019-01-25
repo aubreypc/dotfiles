@@ -51,6 +51,7 @@ let g:ale_fixers = {
 nnoremap <leader>n :bn<cr>
 nnoremap <leader>N :bp<cr>
 nnoremap <leader>d :bp\|bd #<cr>
+nnoremap <leader>D :bd<cr>
 nnoremap <leader>e :Lex<cr>
 nnoremap <leader>l :ALENextWrap<cr>
 nnoremap <leader>L :ALEPreviousWrap<cr>
