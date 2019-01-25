@@ -38,8 +38,19 @@ let g:netrw_altv=1
 let g:netrw_list_hide='.*\.swp$'
 let g:netrw_hide=1
 
+" ale
+let g:ale_fix_on_save=1
+let g:ale_fixers = {
+\	'python': [
+\		'autopep8',
+\		'black',
+\	],
+\}
+
 " buffer-related keybindings
 nnoremap <leader>n :bn<cr>
 nnoremap <leader>N :bp<cr>
-nnoremap <leader>d :bd<cr>
+nnoremap <leader>d :bp\|bd #<cr>
 nnoremap <leader>e :Lex<cr>
+nnoremap <leader>l :ALENextWrap<cr>
+nnoremap <leader>L :ALEPreviousWrap<cr>
