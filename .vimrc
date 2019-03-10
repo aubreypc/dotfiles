@@ -41,6 +41,9 @@ let g:netrw_hide=1
 " ale
 let g:ale_fix_on_save=1
 let g:ale_python_auto_pipenv=1
+let g:ale_python_pylint_auto_pipenv=1
+let g:ale_python_black_auto_pipenv=1
+let g:ale_python_flake8_auto_pipenv=1
 let g:ale_sign_column_always=1
 let g:ale_fixers = {
 \	'python': [
